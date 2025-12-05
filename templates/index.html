@@ -1,9 +1,13 @@
 {% extends "base.html" %}
 {% block content %}
-  <h2>Welcome to Miyavkify</h2>
-  <p>
-    This app helps landowners transform small barren plots into dense Miyawaki-style forests
-    using native, oxygen-giving, and fruit-bearing trees.
-  </p>
-  <a href="{{ url_for('assess') }}">Start your forest assessment →</a>
+  <section class="hero">
+    <h2>Create your own mini-forest</h2>
+    <p class="hero-text">
+      Miyavkify helps you turn small barren spaces into dense Miyawaki forests
+      with smart tree recommendations and simple guidance.
+    </p>
+    <div class="hero-actions">
+      <a href="{{ url_for('assess') }}" class="primary-btn">Start assessment</a>
+    </div>
+  </section>
 {% endblock %}
