@@ -3,25 +3,311 @@
     "Gujarat": {
       "clayey": {
         "oxygen_trees": ["Neem", "Peepal", "Ashoka"],
-        "fruit_trees": ["Mango", "Jamun"],
-        "native_trees": ["Banyan"],
+        "fruit_trees": ["Mango", "Jamun", "Guava"],
+        "native_trees": ["Banyan", "Arjun"],
         "cost_per_tree": 500,
         "maturity_months": 24
       },
       "sandy": {
-        "oxygen_trees": ["Neem"],
-        "fruit_trees": ["Ber"],
+        "oxygen_trees": ["Neem", "Khejri"],
+        "fruit_trees": ["Ber", "Date Palm"],
         "native_trees": ["Babool"],
-        "cost_per_tree": 400,
+        "cost_per_tree": 450,
         "maturity_months": 30
+      },
+      "loamy": {
+        "oxygen_trees": ["Neem", "Peepal", "Gulmohar"],
+        "fruit_trees": ["Mango", "Guava", "Amla"],
+        "native_trees": ["Jamun"],
+        "cost_per_tree": 520,
+        "maturity_months": 24
       }
     },
+
     "Maharashtra": {
       "clayey": {
-        "oxygen_trees": ["Neem", "Gulmohar"],
-        "fruit_trees": ["Mango", "Guava"],
-        "native_trees": ["Jamun"],
+        "oxygen_trees": ["Neem", "Gulmohar", "Rain Tree"],
+        "fruit_trees": ["Mango", "Guava", "Jackfruit"],
+        "native_trees": ["Jamun", "Tamarind"],
         "cost_per_tree": 550,
+        "maturity_months": 24
+      },
+      "sandy": {
+        "oxygen_trees": ["Casuarina", "Neem"],
+        "fruit_trees": ["Coconut", "Cashew"],
+        "native_trees": ["Pongamia"],
+        "cost_per_tree": 600,
+        "maturity_months": 30
+      },
+      "loamy": {
+        "oxygen_trees": ["Peepal", "Ashoka"],
+        "fruit_trees": ["Mango", "Guava", "Amla"],
+        "native_trees": ["Banyan"],
+        "cost_per_tree": 530,
+        "maturity_months": 24
+      }
+    },
+
+    "Karnataka": {
+      "clayey": {
+        "oxygen_trees": ["Neem", "Honge (Pongamia)", "Rain Tree"],
+        "fruit_trees": ["Mango", "Jackfruit", "Guava"],
+        "native_trees": ["Jamun", "Tamarind"],
+        "cost_per_tree": 520,
+        "maturity_months": 24
+      },
+      "sandy": {
+        "oxygen_trees": ["Casuarina", "Neem"],
+        "fruit_trees": ["Coconut", "Sapota"],
+        "native_trees": ["Honge (Pongamia)"],
+        "cost_per_tree": 580,
+        "maturity_months": 30
+      },
+      "loamy": {
+        "oxygen_trees": ["Peepal", "Ashoka"],
+        "fruit_trees": ["Mango", "Guava", "Amla"],
+        "native_trees": ["Banyan"],
+        "cost_per_tree": 540,
+        "maturity_months": 24
+      }
+    },
+
+    "Tamil_Nadu": {
+      "clayey": {
+        "oxygen_trees": ["Neem", "Pongamia", "Peepal"],
+        "fruit_trees": ["Mango", "Jackfruit", "Banana"],
+        "native_trees": ["Tamarind"],
+        "cost_per_tree": 500,
+        "maturity_months": 24
+      },
+      "sandy": {
+        "oxygen_trees": ["Casuarina", "Neem"],
+        "fruit_trees": ["Coconut", "Palmyra"],
+        "native_trees": ["Pongamia"],
+        "cost_per_tree": 570,
+        "maturity_months": 30
+      },
+      "loamy": {
+        "oxygen_trees": ["Gulmohar", "Rain Tree"],
+        "fruit_trees": ["Mango", "Guava", "Amla"],
+        "native_trees": ["Jamun"],
+        "cost_per_tree": 520,
+        "maturity_months": 24
+      }
+    },
+
+    "Kerala": {
+      "clayey": {
+        "oxygen_trees": ["Rain Tree", "Neem"],
+        "fruit_trees": ["Jackfruit", "Mango", "Banana"],
+        "native_trees": ["Jamun", "Tamarind"],
+        "cost_per_tree": 520,
+        "maturity_months": 24
+      },
+      "sandy": {
+        "oxygen_trees": ["Casuarina", "Pongamia"],
+        "fruit_trees": ["Coconut", "Arecanut"],
+        "native_trees": ["Pongamia"],
+        "cost_per_tree": 580,
+        "maturity_months": 30
+      },
+      "loamy": {
+        "oxygen_trees": ["Peepal", "Gulmohar"],
+        "fruit_trees": ["Mango", "Guava", "Papaya"],
+        "native_trees": ["Banyan"],
+        "cost_per_tree": 540,
+        "maturity_months": 24
+      }
+    },
+
+    "Telangana": {
+      "clayey": {
+        "oxygen_trees": ["Neem", "Peepal", "Rain Tree"],
+        "fruit_trees": ["Mango", "Guava", "Amla"],
+        "native_trees": ["Jamun"],
+        "cost_per_tree": 510,
+        "maturity_months": 24
+      },
+      "sandy": {
+        "oxygen_trees": ["Neem", "Babool"],
+        "fruit_trees": ["Ber"],
+        "native_trees": ["Khejri"],
+        "cost_per_tree": 470,
+        "maturity_months": 30
+      },
+      "loamy": {
+        "oxygen_trees": ["Ashoka", "Gulmohar"],
+        "fruit_trees": ["Mango", "Guava"],
+        "native_trees": ["Banyan"],
+        "cost_per_tree": 530,
+        "maturity_months": 24
+      }
+    },
+
+    "Andhra_Pradesh": {
+      "clayey": {
+        "oxygen_trees": ["Neem", "Pongamia", "Rain Tree"],
+        "fruit_trees": ["Mango", "Guava", "Banana"],
+        "native_trees": ["Jamun"],
+        "cost_per_tree": 510,
+        "maturity_months": 24
+      },
+      "sandy": {
+        "oxygen_trees": ["Casuarina", "Neem"],
+        "fruit_trees": ["Coconut", "Cashew"],
+        "native_trees": ["Pongamia"],
+        "cost_per_tree": 570,
+        "maturity_months": 30
+      },
+      "loamy": {
+        "oxygen_trees": ["Peepal", "Gulmohar"],
+        "fruit_trees": ["Mango", "Guava", "Amla"],
+        "native_trees": ["Banyan"],
+        "cost_per_tree": 530,
+        "maturity_months": 24
+      }
+    },
+
+    "Delhi_NCR": {
+      "clayey": {
+        "oxygen_trees": ["Neem", "Peepal", "Ashoka"],
+        "fruit_trees": ["Jamun", "Amla", "Guava"],
+        "native_trees": ["Arjun"],
+        "cost_per_tree": 520,
+        "maturity_months": 24
+      },
+      "sandy": {
+        "oxygen_trees": ["Neem", "Babool"],
+        "fruit_trees": ["Ber"],
+        "native_trees": ["Khejri"],
+        "cost_per_tree": 480,
+        "maturity_months": 30
+      },
+      "loamy": {
+        "oxygen_trees": ["Peepal", "Gulmohar"],
+        "fruit_trees": ["Mango", "Guava"],
+        "native_trees": ["Banyan"],
+        "cost_per_tree": 540,
+        "maturity_months": 24
+      }
+    },
+
+    "Uttar_Pradesh": {
+      "clayey": {
+        "oxygen_trees": ["Neem", "Peepal", "Ashoka"],
+        "fruit_trees": ["Mango", "Guava", "Amla"],
+        "native_trees": ["Jamun"],
+        "cost_per_tree": 500,
+        "maturity_months": 24
+      },
+      "sandy": {
+        "oxygen_trees": ["Neem", "Babool"],
+        "fruit_trees": ["Ber"],
+        "native_trees": ["Shisham"],
+        "cost_per_tree": 460,
+        "maturity_months": 30
+      },
+      "loamy": {
+        "oxygen_trees": ["Gulmohar", "Ashoka"],
+        "fruit_trees": ["Mango", "Guava"],
+        "native_trees": ["Banyan"],
+        "cost_per_tree": 520,
+        "maturity_months": 24
+      }
+    },
+
+    "Rajasthan": {
+      "clayey": {
+        "oxygen_trees": ["Neem", "Peepal"],
+        "fruit_trees": ["Ber", "Amla"],
+        "native_trees": ["Khejri"],
+        "cost_per_tree": 480,
+        "maturity_months": 30
+      },
+      "sandy": {
+        "oxygen_trees": ["Neem", "Khejri"],
+        "fruit_trees": ["Ber"],
+        "native_trees": ["Babool"],
+        "cost_per_tree": 450,
+        "maturity_months": 32
+      },
+      "loamy": {
+        "oxygen_trees": ["Ashoka", "Gulmohar"],
+        "fruit_trees": ["Mango", "Guava"],
+        "native_trees": ["Banyan"],
+        "cost_per_tree": 520,
+        "maturity_months": 26
+      }
+    },
+
+    "West_Bengal": {
+      "clayey": {
+        "oxygen_trees": ["Neem", "Peepal", "Rain Tree"],
+        "fruit_trees": ["Mango", "Jackfruit", "Litchi"],
+        "native_trees": ["Jamun"],
+        "cost_per_tree": 520,
+        "maturity_months": 24
+      },
+      "sandy": {
+        "oxygen_trees": ["Casuarina"],
+        "fruit_trees": ["Coconut"],
+        "native_trees": ["Pongamia"],
+        "cost_per_tree": 560,
+        "maturity_months": 30
+      },
+      "loamy": {
+        "oxygen_trees": ["Gulmohar", "Ashoka"],
+        "fruit_trees": ["Mango", "Guava", "Banana"],
+        "native_trees": ["Banyan"],
+        "cost_per_tree": 530,
+        "maturity_months": 24
+      }
+    },
+
+    "Madhya_Pradesh": {
+      "clayey": {
+        "oxygen_trees": ["Neem", "Peepal", "Teak"],
+        "fruit_trees": ["Mango", "Amla", "Guava"],
+        "native_trees": ["Jamun"],
+        "cost_per_tree": 510,
+        "maturity_months": 24
+      },
+      "sandy": {
+        "oxygen_trees": ["Neem", "Babool"],
+        "fruit_trees": ["Ber"],
+        "native_trees": ["Khejri"],
+        "cost_per_tree": 470,
+        "maturity_months": 30
+      },
+      "loamy": {
+        "oxygen_trees": ["Gulmohar", "Ashoka"],
+        "fruit_trees": ["Mango", "Guava"],
+        "native_trees": ["Banyan"],
+        "cost_per_tree": 525,
+        "maturity_months": 24
+      }
+    },
+
+    "Punjab": {
+      "clayey": {
+        "oxygen_trees": ["Neem", "Peepal", "Shisham"],
+        "fruit_trees": ["Mango", "Guava", "Kinnow"],
+        "native_trees": ["Jamun"],
+        "cost_per_tree": 520,
+        "maturity_months": 24
+      },
+      "sandy": {
+        "oxygen_trees": ["Neem", "Babool"],
+        "fruit_trees": ["Ber"],
+        "native_trees": ["Kikar"],
+        "cost_per_tree": 480,
+        "maturity_months": 30
+      },
+      "loamy": {
+        "oxygen_trees": ["Gulmohar", "Ashoka"],
+        "fruit_trees": ["Mango", "Guava"],
+        "native_trees": ["Banyan"],
+        "cost_per_tree": 540,
         "maturity_months": 24
       }
     }
