@@ -17,15 +17,41 @@
           </ul>
         </div>
 
-        <div class="metrics">
+                <div class="metrics">
           <h3>Quick stats</h3>
-          <p>Approx. cost per tree: <strong>₹{{ recommendations.cost_per_tree }}</strong></p>
-          <p>Becomes self-sustaining in about <strong>{{ recommendations.maturity_months }} months</strong></p>
+          <p>
+            Plot area:
+            <strong>{{ area_sqm }} m²</strong>
+          </p>
+          <p>
+            Estimated trees to plant:
+            <strong>{{ tree_count }}</strong>
+          </p>
+          <p>
+            Approx. cost per tree:
+            <strong>₹{{ recommendations.cost_per_tree }}</strong>
+          </p>
+          <p>
+            Estimated total planting cost:
+            <strong>₹{{ impact.total_cost }}</strong>
+          </p>
+          <p>
+            Becomes self-sustaining in about
+            <strong>{{ recommendations.maturity_months }} months</strong>
+          </p>
+          <p>
+            Estimated CO₂ absorbed per year:
+            <strong>{{ impact.co2_kg_per_year }} kg</strong>
+          </p>
+          <p>
+            Estimated oxygen released per year:
+            <strong>{{ impact.oxygen_kg_per_year }} kg</strong>
+          </p>
           <p class="note">
-            Next: we’ll add detailed CO₂, oxygen and fruit impact here.
+            These are simplified estimates for planning and hackathon demo purposes.
           </p>
         </div>
-      </div>
+
     {% else %}
       <p class="section-subtitle">
         We don’t have data for this combination yet. Try a different region or soil type.

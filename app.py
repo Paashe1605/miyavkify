@@ -43,6 +43,45 @@ def get_recommendations(region, soil, wants_fruit):
         "maturity_months": data.get("maturity_months", 24),
     }
 
+def estimate_tree_count(area_sqm):
+    """
+    Estimate how many trees can be planted in Miyawaki style.
+    Assumption: ~4 trees per square meter (dense micro-forest).
+    """
+    try:
+        area = float(area_sqm)
+    except (TypeError, ValueError):
+        return 0
+    if area <= 0:
+        return 0
+    return int(area * 4)
+
+
+def compute_impact(tree_count, cost_per_tree):
+    """
+    Rough impact estimates per year, based on tree_count.
+    These are simplified hackathon-level constants.
+    """
+    if tree_count <= 0:
+        return {
+            "co2_kg_per_year": 0,
+            "oxygen_kg_per_year": 0,
+            "total_cost": 0,
+        }
+
+    co2_per_tree = 20   # kg CO2 absorbed per tree per year (approx)
+    oxygen_per_tree = 22  # kg oxygen released per tree per year (approx)
+
+    co2_total = tree_count * co2_per_tree
+    oxygen_total = tree_count * oxygen_per_tree
+    total_cost = tree_count * cost_per_tree
+
+    return {
+        "co2_kg_per_year": co2_total,
+        "oxygen_kg_per_year": oxygen_total,
+        "total_cost": total_cost,
+    }
+
 
 @app.route("/")
 def index():
@@ -55,14 +94,21 @@ def assess():
         region = request.form.get("region")
         soil = request.form.get("soil")
         wants_fruit = request.form.get("wants_fruit") == "on"
+        area_sqm = request.form.get("area_sqm")
 
         rec = get_recommendations(region, soil, wants_fruit)
+
+        tree_count = estimate_tree_count(area_sqm)
+        impact = compute_impact(tree_count, rec["cost_per_tree"])
 
         return render_template(
             "results.html",
             region=region,
             soil=soil,
+            area_sqm=area_sqm,
             recommendations=rec,
+            tree_count=tree_count,
+            impact=impact,
         )
 
     regions = sorted(PLANT_DB["regions"].keys())
