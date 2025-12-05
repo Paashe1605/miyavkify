@@ -1,0 +1,29 @@
+{
+  "regions": {
+    "Gujarat": {
+      "clayey": {
+        "oxygen_trees": ["Neem", "Peepal", "Ashoka"],
+        "fruit_trees": ["Mango", "Jamun"],
+        "native_trees": ["Banyan"],
+        "cost_per_tree": 500,
+        "maturity_months": 24
+      },
+      "sandy": {
+        "oxygen_trees": ["Neem"],
+        "fruit_trees": ["Ber"],
+        "native_trees": ["Babool"],
+        "cost_per_tree": 400,
+        "maturity_months": 30
+      }
+    },
+    "Maharashtra": {
+      "clayey": {
+        "oxygen_trees": ["Neem", "Gulmohar"],
+        "fruit_trees": ["Mango", "Guava"],
+        "native_trees": ["Jamun"],
+        "cost_per_tree": 550,
+        "maturity_months": 24
+      }
+    }
+  }
+}

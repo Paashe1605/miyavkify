@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Miyavkify</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  </head>
+  <body>
+    <header>
+      <h1>Miyavkify</h1>
+      <p>Turn barren land into dense Miyawaki forests.</p>
+      <nav>
+        <a href="{{ url_for('index') }}">Home</a> |
+        <a href="{{ url_for('assess') }}">Start Assessment</a>
+      </nav>
+      <hr>
+    </header>
+
+    <main>
+      {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+      <hr>
+      <small>Built for Autonomous Hacks 2026</small>
+    </footer>
+  </body>
+</html>

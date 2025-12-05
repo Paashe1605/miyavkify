@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2>Recommended Forest Plan</h2>
+  <p>Region: <strong>{{ region }}</strong> | Soil: <strong>{{ soil }}</strong></p>
+
+  {% if recommendations.plants %}
+    <h3>Tree species to plant:</h3>
+    <ul>
+      {% for p in recommendations.plants %}
+        <li>{{ p }}</li>
+      {% endfor %}
+    </ul>
+
+    <p>
+      Approx cost per tree: ₹{{ recommendations.cost_per_tree }}<br>
+      Approx time to become self-sustaining: {{ recommendations.maturity_months }} months
+    </p>
+
+    <p>(We’ll add CO₂, oxygen, fruit estimates and gamification later.)</p>
+  {% else %}
+    <p>Sorry, no data yet for this combination. Try another region/soil.</p>
+  {% endif %}
+
+  <a href="{{ url_for('assess') }}">← Back to assessment</a>
+{% endblock %}

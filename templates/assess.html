@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2>Land Assessment</h2>
+  <form method="post">
+    <label for="region">Region/State:</label>
+    <select id="region" name="region" required>
+      {% for r in regions %}
+        <option value="{{ r }}">{{ r }}</option>
+      {% endfor %}
+    </select>
+    <br><br>
+
+    <label for="soil">Soil type:</label>
+    <select id="soil" name="soil" required>
+      {% for s in soils %}
+        <option value="{{ s }}">{{ s }}</option>
+      {% endfor %}
+    </select>
+    <br><br>
+
+    <label>
+      <input type="checkbox" name="wants_fruit">
+      Include fruit-bearing trees
+    </label>
+    <br><br>
+
+    <button type="submit">Get Recommendations</button>
+  </form>
+{% endblock %}
