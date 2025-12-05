@@ -3,11 +3,15 @@
   <head>
     <meta charset="utf-8">
     <title>Miyavkify</title>
+    <!-- Make layout responsive on mobile -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Main CSS file -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
   </head>
   <body>
+    <!-- Overall layout wrapper -->
     <div class="app-shell">
+      <!-- Top bar with logo and navigation -->
       <header class="app-header">
         <div class="brand">
           <div class="logo-circle">M</div>
@@ -18,17 +22,20 @@
         </div>
 
         <nav class="nav">
+          <!-- Links to main pages -->
           <a href="{{ url_for('index') }}" class="nav-link">Home</a>
           <a href="{{ url_for('assess') }}" class="nav-link">Start Assessment</a>
         </nav>
       </header>
 
+      <!-- Center card where each page injects its content -->
       <main class="app-main">
         <div class="card">
           {% block content %}{% endblock %}
         </div>
       </main>
 
+      <!-- Small footer line -->
       <footer class="app-footer">
         <small>Built for Autonomous Hacks 2026 • Greening one plot at a time</small>
       </footer>

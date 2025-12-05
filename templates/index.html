@@ -1,11 +1,17 @@
 {% extends "base.html" %}
 {% block content %}
+  <!-- Hero section on the landing page -->
   <section class="hero">
+    <!-- Main heading -->
     <h2>Create your own mini-forest</h2>
+
+    <!-- Brief description of what the app does -->
     <p class="hero-text">
       Miyavkify helps you turn small barren spaces into dense Miyawaki forests
       with smart tree recommendations and simple guidance.
     </p>
+
+    <!-- Call-to-action button -->
     <div class="hero-actions">
       <a href="{{ url_for('assess') }}" class="primary-btn">Start assessment</a>
     </div>

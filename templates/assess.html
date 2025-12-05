@@ -3,10 +3,13 @@
   <section>
     <h2>Land assessment</h2>
     <p class="section-subtitle">
+      <!-- Short description under the title -->
       Tell us a bit about your land so we can suggest the right mix of trees.
     </p>
 
+    <!-- Main assessment form -->
     <form method="post" class="form">
+      <!-- Region selection -->
       <div class="form-row">
         <label for="region">Region / State</label>
         <select id="region" name="region" required>
@@ -16,6 +19,7 @@
         </select>
       </div>
 
+      <!-- Soil type selection -->
       <div class="form-row">
         <label for="soil">Soil type</label>
         <select id="soil" name="soil" required>
@@ -25,6 +29,7 @@
         </select>
       </div>
 
+      <!-- Area input (used for tree count + impact) -->
       <div class="form-row">
         <label for="area_sqm">Area of land (in square meters)</label>
         <input
@@ -38,7 +43,7 @@
         >
       </div>
 
-
+      <!-- Optional fruit-tree preference -->
       <div class="form-row checkbox-row">
         <label>
           <input type="checkbox" name="wants_fruit">
@@ -46,6 +51,7 @@
         </label>
       </div>
 
+      <!-- Submit button -->
       <div class="form-actions">
         <button type="submit" class="primary-btn">Get recommendations</button>
       </div>
