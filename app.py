@@ -58,6 +58,19 @@ def estimate_tree_count(area_sqm):
         return 0
     return int(area * 4)
 
+def estimate_traditional_tree_count(area_sqm):
+    """
+    Estimate trees in a traditional plantation (≈1.5 trees per m²).
+    """
+    try:
+        area = float(area_sqm)
+    except (TypeError, ValueError):
+        return 0
+    if area <= 0:
+        return 0
+    return int(area * 1.5)
+
+
 
 def compute_impact(tree_count, cost_per_tree):
     """
@@ -105,10 +118,36 @@ def assess():
         wants_fruit = request.form.get("wants_fruit") == "on"
         area_sqm = request.form.get("area_sqm")
 
-        # Core logic
+        # Miyawaki recommendations and impact
         rec = get_recommendations(region, soil, wants_fruit)
         tree_count = estimate_tree_count(area_sqm)
         impact = compute_impact(tree_count, rec["cost_per_tree"])
+
+               # Traditional plantation scenario (lower density, slightly cheaper per tree)
+        traditional_tree_count = estimate_traditional_tree_count(area_sqm)
+        traditional_cost_per_tree = int(rec["cost_per_tree"] * 0.85)  # ~15% cheaper
+        traditional_impact = compute_impact(traditional_tree_count, traditional_cost_per_tree)
+
+        # Assume traditional plantations take about 2× longer to become stable
+        traditional_maturity_months = int(rec["maturity_months"] * 2)
+
+        # Simple ratios for explanation (avoid divide-by-zero)
+        trees_ratio = 0
+        cost_ratio = 0
+        speed_ratio = 0
+        if traditional_tree_count > 0:
+            trees_ratio = round(tree_count / traditional_tree_count, 1)
+        if traditional_impact["total_cost"] > 0:
+            cost_ratio = round(impact["total_cost"] / traditional_impact["total_cost"], 1)
+        if traditional_maturity_months > 0:
+            speed_ratio = round(traditional_maturity_months / rec["maturity_months"], 1)
+
+        comparison = {
+            "trees_ratio": trees_ratio,
+            "cost_ratio": cost_ratio,
+            "speed_ratio": speed_ratio
+        }
+
 
         # Render results page with all data
         return render_template(
@@ -119,7 +158,13 @@ def assess():
             recommendations=rec,
             tree_count=tree_count,
             impact=impact,
+            traditional_tree_count=traditional_tree_count,
+            traditional_cost_per_tree=traditional_cost_per_tree,
+            traditional_impact=traditional_impact,
+            traditional_maturity_months=traditional_maturity_months,
+            comparison=comparison,
         )
+
 
     # For GET: show blank form
     regions = sorted(PLANT_DB["regions"].keys())

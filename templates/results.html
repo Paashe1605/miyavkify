@@ -44,17 +44,38 @@
             Becomes self-sustaining in about
             <strong>{{ recommendations.maturity_months }} months</strong>
           </p>
+                    <p>
+            Traditional plantation becomes stable in about
+            <strong>{{ traditional_maturity_months }} months</strong>.
+          </p>
+
           <p>
             Estimated CO₂ absorbed per year:
             <strong>{{ impact.co2_kg_per_year }} kg</strong>
           </p>
-          <p>
+                    <p>
             Estimated oxygen released per year:
             <strong>{{ impact.oxygen_kg_per_year }} kg</strong>
           </p>
-          <p class="note">
-            These are simplified estimates for planning and hackathon demo purposes.
+
+          <!-- Traditional plantation comparison -->
+          <p>
+            Traditional plantation on the same plot:
+            <strong>{{ traditional_tree_count }} trees</strong>,
+            est. cost
+            <strong>₹{{ traditional_impact.total_cost }}</strong>.
           </p>
+                    <p class="note">
+            Miyavaki-style planting gives about
+            <strong>{{ comparison.trees_ratio }}× more trees</strong>,
+            reaches stability about
+            <strong>{{ comparison.speed_ratio }}× faster</strong>,
+            for roughly
+            <strong>{{ comparison.cost_ratio }}× the cost</strong>
+            on the same land (all values are rough demo estimates).
+          </p>
+
+
         </div>
       </div>
 
