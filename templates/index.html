@@ -2,18 +2,47 @@
 {% block content %}
   <!-- Hero section on the landing page -->
   <section class="hero">
-    <!-- Main heading -->
     <h2>Create your own mini-forest</h2>
 
-    <!-- Brief description of what the app does -->
     <p class="hero-text">
       Miyavkify helps you turn small barren spaces into dense Miyawaki forests
       with smart tree recommendations and simple guidance.
     </p>
 
-    <!-- Call-to-action button -->
     <div class="hero-actions">
       <a href="{{ url_for('assess') }}" class="primary-btn">Start assessment</a>
+    </div>
+  </section>
+
+  <!-- Feature highlights -->
+  <section class="feature-row">
+    <div class="feature-card">
+      <h3>Region-smart planting</h3>
+      <p>Suggestions adapt to your state and soil, using a mix of native and high-oxygen trees.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Impact at a glance</h3>
+      <p>See trees, cost, CO₂ absorption, and oxygen release for your exact plot size.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Miyavaki vs. traditional</h3>
+      <p>Compare density, time to stability, and budget so you can explain your choice clearly.</p>
+    </div>
+  </section>
+
+  <!-- Simple how-it-works strip -->
+  <section class="steps-strip">
+    <div class="step-pill">
+      <span class="step-number">1</span>
+      <span class="step-text">Describe your land</span>
+    </div>
+    <div class="step-pill">
+      <span class="step-number">2</span>
+      <span class="step-text">Get your forest plan</span>
+    </div>
+    <div class="step-pill">
+      <span class="step-number">3</span>
+      <span class="step-text">Plant & track progress</span>
     </div>
   </section>
 {% endblock %}

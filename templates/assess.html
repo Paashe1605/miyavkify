@@ -2,16 +2,25 @@
 {% block content %}
   <section>
     <h2>Land assessment</h2>
+
+    <!-- Small step indicator -->
+    <p class="section-subtitle assess-steps">
+      <span class="step-dot step-dot--active"></span> Step 1 · Land details
+      <span class="step-arrow">→</span>
+      <span class="step-dot"></span> Step 2 · Forest plan
+    </p>
+
+    <!-- Short explainer -->
     <p class="section-subtitle">
-      <!-- Short description under the title -->
       Tell us a bit about your land so we can suggest the right mix of trees.
     </p>
 
     <!-- Main assessment form -->
-    <form method="post" class="form">
+    <form method="post" class="form assess-form">
       <!-- Region selection -->
       <div class="form-row">
         <label for="region">Region / State</label>
+        <small class="field-hint">Choose the state where your plot is located.</small>
         <select id="region" name="region" required>
           {% for r in regions %}
             <option value="{{ r }}">{{ r }}</option>
@@ -22,6 +31,7 @@
       <!-- Soil type selection -->
       <div class="form-row">
         <label for="soil">Soil type</label>
+        <small class="field-hint">Pick the closest match; you can adjust later.</small>
         <select id="soil" name="soil" required>
           {% for s in soils %}
             <option value="{{ s }}">{{ s }}</option>
@@ -32,6 +42,7 @@
       <!-- Area input (used for tree count + impact) -->
       <div class="form-row">
         <label for="area_sqm">Area of land (in square meters)</label>
+        <small class="field-hint">Approximate is okay; start with a rough number.</small>
         <input
           type="number"
           id="area_sqm"
@@ -49,11 +60,15 @@
           <input type="checkbox" name="wants_fruit">
           Include fruit-bearing trees
         </label>
+        <small class="field-hint">We still prioritise native and high-oxygen species.</small>
       </div>
 
-      <!-- Submit button -->
-      <div class="form-actions">
+      <!-- Submit button + info strip -->
+      <div class="form-actions assess-actions">
         <button type="submit" class="primary-btn">Get recommendations</button>
+        <p class="form-note">
+          No personal data is collected here – only plot details to shape your forest plan.
+        </p>
       </div>
     </form>
   </section>
