@@ -1,8 +1,18 @@
 from flask import Flask, render_template, request
 import json
+import os                      # for file paths
+from datetime import datetime  # for timestamped filenames
+from werkzeug.utils import secure_filename  # safe filenames for uploads
 
 # Create Flask app
 app = Flask(__name__)
+
+# Upload + log configuration
+UPLOAD_FOLDER = os.path.join("static", "uploads")
+LOG_PATH = os.path.join("data", "progress_log.json")
+ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg"}
+
+app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
 # Load plant data once at startup
 with open("plant_database.json", "r", encoding="utf-8") as f:
@@ -58,6 +68,7 @@ def estimate_tree_count(area_sqm):
         return 0
     return int(area * 4)
 
+
 def estimate_traditional_tree_count(area_sqm):
     """
     Estimate trees in a traditional plantation (≈1.5 trees per m²).
@@ -69,7 +80,6 @@ def estimate_traditional_tree_count(area_sqm):
     if area <= 0:
         return 0
     return int(area * 1.5)
-
 
 
 def compute_impact(tree_count, cost_per_tree):
@@ -98,6 +108,74 @@ def compute_impact(tree_count, cost_per_tree):
     }
 
 
+# ---------- Day 3 helpers: uploads + log ----------
+
+def allowed_file(filename):
+    """
+    Check if file has an allowed extension.
+    """
+    return "." in filename and filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
+
+
+def load_progress_log():
+    """
+    Read the JSON progress log from disk.
+    """
+    if not os.path.exists(LOG_PATH):
+        return []
+    with open(LOG_PATH, "r", encoding="utf-8") as f:
+        try:
+            return json.load(f)
+        except json.JSONDecodeError:
+            return []
+
+
+def save_progress_log(entries):
+    """
+    Write the JSON progress log to disk.
+    """
+    with open(LOG_PATH, "w", encoding="utf-8") as f:
+        json.dump(entries, f, ensure_ascii=False, indent=2)
+
+
+def save_progress_entry(region, soil, area_sqm, note, file_storage):
+    """
+    Save uploaded image + a log entry. Returns saved filename or None.
+    """
+    if not (file_storage and allowed_file(file_storage.filename)):
+        return None
+
+    # Ensure upload folder exists
+    os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+
+    # Safe, timestamped filename
+    timestamp = datetime.utcnow().strftime("%Y%m%d%H%M%S")
+    original = secure_filename(file_storage.filename)
+    filename = f"{timestamp}_{original}"
+    filepath = os.path.join(UPLOAD_FOLDER, filename)
+
+    # Save file
+    file_storage.save(filepath)
+
+    # Append log entry
+    entries = load_progress_log()
+    entries.append(
+        {
+            "region": region,
+            "soil": soil,
+            "area_sqm": area_sqm,
+            "note": note,
+            "filename": filename,
+            "created_at": timestamp,
+        }
+    )
+    save_progress_log(entries)
+
+    return filename
+
+
+# ---------- Routes ----------
+
 @app.route("/")
 def index():
     """
@@ -123,7 +201,7 @@ def assess():
         tree_count = estimate_tree_count(area_sqm)
         impact = compute_impact(tree_count, rec["cost_per_tree"])
 
-               # Traditional plantation scenario (lower density, slightly cheaper per tree)
+        # Traditional plantation scenario (lower density, slightly cheaper per tree)
         traditional_tree_count = estimate_traditional_tree_count(area_sqm)
         traditional_cost_per_tree = int(rec["cost_per_tree"] * 0.85)  # ~15% cheaper
         traditional_impact = compute_impact(traditional_tree_count, traditional_cost_per_tree)
@@ -145,9 +223,8 @@ def assess():
         comparison = {
             "trees_ratio": trees_ratio,
             "cost_ratio": cost_ratio,
-            "speed_ratio": speed_ratio
+            "speed_ratio": speed_ratio,
         }
-
 
         # Render results page with all data
         return render_template(
@@ -165,11 +242,51 @@ def assess():
             comparison=comparison,
         )
 
-
     # For GET: show blank form
     regions = sorted(PLANT_DB["regions"].keys())
     soils = ["clayey", "sandy", "loamy"]
     return render_template("assess.html", regions=regions, soils=soils)
+
+
+@app.route("/progress", methods=["GET", "POST"])
+def progress():
+    """
+    Upload a progress photo + note for a plot.
+    """
+    if request.method == "POST":
+        # Hidden context fields
+        region = request.form.get("region")
+        soil = request.form.get("soil")
+        area_sqm = request.form.get("area_sqm")
+        note = request.form.get("note", "").strip()
+
+        file = request.files.get("photo")
+
+        saved_filename = save_progress_entry(region, soil, area_sqm, note, file)
+
+        # Simple success / error flag
+        success = saved_filename is not None
+
+        return render_template(
+            "progress.html",
+            region=region,
+            soil=soil,
+            area_sqm=area_sqm,
+            success=success,
+        )
+
+    # GET: show form, prefilled from query string
+    region = request.args.get("region", "")
+    soil = request.args.get("soil", "")
+    area_sqm = request.args.get("area_sqm", "")
+
+    return render_template(
+        "progress.html",
+        region=region,
+        soil=soil,
+        area_sqm=area_sqm,
+        success=None,
+    )
 
 
 if __name__ == "__main__":
