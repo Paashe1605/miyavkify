@@ -87,8 +87,16 @@
     {% endif %}
 
     <!-- Button to go back and change inputs -->
-    <div class="form-actions">
+        <div class="form-actions">
       <a href="{{ url_for('assess') }}" class="secondary-btn">Back to assessment</a>
+      <a
+        href="{{ url_for('progress', region=region, soil=soil, area_sqm=area_sqm) }}"
+        class="primary-btn"
+        style="margin-left: 8px;"
+      >
+        Add progress photo
+      </a>
     </div>
+
   </section>
 {% endblock %}
