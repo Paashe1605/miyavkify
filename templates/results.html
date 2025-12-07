@@ -11,9 +11,20 @@
     {% if recommendations.plants %}
       <!-- Two-column layout: tree list + impact metrics -->
       <div class="results-grid">
-        <!-- List of recommended species + infographics -->
+        <!-- List of recommended species + image pill + infographics -->
         <div>
           <h3>Tree species to plant</h3>
+
+          <!-- Image attached pill (shown only when image was uploaded) -->
+          {% if has_image %}
+          <div class="image-upload-banner image-upload-banner--visible">
+            <span class="image-pill-dot"></span>
+            <span class="image-pill-text">
+              Image from your plot is attached for review.
+            </span>
+          </div>
+          {% endif %}
+
           <ul class="plant-list">
             {% for p in recommendations.plants %}
               <li>{{ p }}</li>
@@ -100,7 +111,7 @@
               </p>
               <p>
                 Total planting cost:
-                <strong>₹{{ traditional_impact.total_cost }}</strong>
+                <strong>{{ traditional_impact.total_cost }}</strong>
               </p>
               <p>
                 Becomes stable in about
@@ -138,16 +149,8 @@
     {% endif %}
 
     <!-- Button to go back and change inputs -->
-        <div class="form-actions">
+    <div class="form-actions">
       <a href="{{ url_for('assess') }}" class="secondary-btn">Back to assessment</a>
-      <a
-        href="{{ url_for('progress', region=region, soil=soil, area_sqm=area_sqm) }}"
-        class="primary-btn"
-        style="margin-left: 8px;"
-      >
-        Add progress photo
-      </a>
     </div>
-
   </section>
 {% endblock %}

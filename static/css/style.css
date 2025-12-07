@@ -273,6 +273,36 @@ h3 {
 }
 
 
+.image-upload-banner {
+  margin-top: 6px;
+  display: none;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(4, 20, 11, 0.9);
+  border: 1px solid rgba(144, 238, 144, 0.5);
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.image-upload-banner--visible {
+  display: inline-flex;
+}
+
+.image-pill-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #4caf50, #8bc34a);
+  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.35);
+}
+
+.image-pill-text {
+  white-space: normal;
+}
+
+
 /* Form */
 
 .form {
@@ -341,6 +371,33 @@ h3 {
   border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45);
 }
+
+.feature-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  margin-bottom: 6px;
+  background: rgba(144, 238, 144, 0.18);
+  border: 1px solid rgba(144, 238, 144, 0.4);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.4);
+}
+
+.feature-icon--map {
+  background: rgba(144, 238, 144, 0.22);
+}
+
+.feature-icon--impact {
+  background: rgba(129, 212, 250, 0.22);
+}
+
+.feature-icon--compare {
+  background: rgba(255, 224, 130, 0.22);
+}
+
 
 .feature-card h3 {
   margin: 0 0 6px;

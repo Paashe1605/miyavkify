@@ -16,7 +16,7 @@
     </p>
 
     <!-- Main assessment form -->
-    <form method="post" class="form assess-form">
+    <form method="post" enctype="multipart/form-data" class="form assess-form">
       <!-- Region selection -->
       <div class="form-row">
         <label for="region">Region / State</label>
@@ -61,6 +61,27 @@
           Include fruit-bearing trees
         </label>
         <small class="field-hint">We still prioritise native and high-oxygen species.</small>
+      </div>
+
+      <!-- Optional reference image -->
+      <div class="form-row">
+        <label for="plot_image">Add a photo (optional)</label>
+        <small class="field-hint">Upload a photo of your plot so we can better understand the space.</small>
+        <input
+          type="file"
+          id="plot_image"
+          name="plot_image"
+          accept="image/*"
+          onchange="document.getElementById('image-upload-banner').classList.add('image-upload-banner--visible')"
+        >
+      </div>
+
+      <!-- Attractive upload confirmation banner -->
+      <div id="image-upload-banner" class="image-upload-banner">
+        <span class="image-pill-dot"></span>
+        <span class="image-pill-text">
+          Image uploded successfully.
+        </span>
       </div>
 
       <!-- Submit button + info strip -->
