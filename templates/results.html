@@ -111,7 +111,7 @@
               </p>
               <p>
                 Total planting cost:
-                <strong>{{ traditional_impact.total_cost }}</strong>
+                <strong>₹{{ traditional_impact.total_cost }}</strong>
               </p>
               <p>
                 Becomes stable in about
@@ -148,9 +148,18 @@
       </p>
     {% endif %}
 
-    <!-- Button to go back and change inputs -->
+    <!-- Actions: back + add progress photo -->
     <div class="form-actions">
-      <a href="{{ url_for('assess') }}" class="secondary-btn">Back to assessment</a>
+      <a href="{{ url_for('assess') }}" class="secondary-btn">
+        Back to assessment
+      </a>
+
+      <a
+        href="{{ url_for('progress', region=region, soil=soil, area_sqm=area_sqm) }}"
+        class="primary-btn"
+      >
+        Add progress photo
+      </a>
     </div>
   </section>
 {% endblock %}
