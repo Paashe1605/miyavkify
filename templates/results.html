@@ -147,6 +147,51 @@
         We don’t have data for this combination yet. Try a different region or soil type.
       </p>
     {% endif %}
+        <!-- How to plant this forest: simple, guided steps -->
+    <div class="card forest-steps-card">
+      <h3>How to plant this forest</h3>
+      <p class="section-subtitle">
+        Use this as a simple checklist for your {{ area_sqm }} m² plot.
+      </p>
+
+      <ol class="steps-list">
+        <li>
+          <strong>Prepare the soil:</strong>
+          Clear weeds and debris, then loosen at least 30 cm of top soil.
+          Mix in good compost or organic matter across the whole {{ area_sqm }} m² area so the soil stays moist and airy.
+        </li>
+
+        <li>
+          <strong>Plan dense spacing:</strong>
+          Aim for roughly 3–4 saplings per square meter so the canopy closes quickly.
+          For your plot, plan to plant about <strong>{{ tree_count }}</strong> saplings, mixing different species together instead of in straight rows.
+        </li>
+
+        <li>
+          <strong>Mix species well:</strong>
+          Take the oxygen, fruit, and native species from your plan above and group them in small mixed clusters.
+          Avoid planting the same species in long single-species lines; variety is the strength of a Miyawaki forest.
+        </li>
+
+        <li>
+          <strong>Plant correctly:</strong>
+          Dig pits slightly wider than the sapling roots, add a bit of compost at the bottom, place the sapling straight,
+          and press soil firmly so there are no big air gaps around the roots.
+        </li>
+
+        <li>
+          <strong>Mulch and protect:</strong>
+          After planting, cover the surface with dry leaves, straw, or other organic mulch to keep moisture and suppress weeds.
+          Add a simple fence or markers so people do not walk through the young forest by mistake.
+        </li>
+
+        <li>
+          <strong>Care for the first years:</strong>
+          Water regularly (especially in the first hot season) and remove aggressive weeds near the saplings.
+          With good care for roughly {{ recommendations.maturity_months or 24 }} months, the forest should become mostly self-sustaining.
+        </li>
+      </ol>
+    </div>
 
     <!-- Actions: back + add progress photo -->
     <div class="form-actions">
