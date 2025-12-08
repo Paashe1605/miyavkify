@@ -1,22 +1,31 @@
 from flask import Flask, render_template, request
 import json
-import os                      # for file paths
-from datetime import datetime  # for timestamped filenames
-from werkzeug.utils import secure_filename  # safe filenames for uploads
+import os
+from datetime import datetime
+from werkzeug.utils import secure_filename
 
-# Create Flask app
+# ----------------- App + paths -----------------
+
 app = Flask(__name__)
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
 # Upload + log configuration
-UPLOAD_FOLDER = os.path.join("static", "uploads")
-LOG_PATH = os.path.join("data", "progress_log.json")
+UPLOAD_FOLDER = os.path.join(BASE_DIR, "static", "uploads")
+LOG_PATH = os.path.join(BASE_DIR, "data", "progress_log.json")
 ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg"}
 
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
-# Load plant data once at startup
-with open("plant_database.json", "r", encoding="utf-8") as f:
+# Make sure upload folder exists
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+
+# ----------------- Plant data -----------------
+
+with open(os.path.join(BASE_DIR, "plant_database.json"), "r", encoding="utf-8") as f:
     PLANT_DB = json.load(f)
+
+# ----------------- Recommendation + impact -----------------
 
 
 def get_recommendations(region, soil, wants_fruit):
@@ -107,8 +116,8 @@ def compute_impact(tree_count, cost_per_tree):
         "total_cost": total_cost,
     }
 
+# ----------------- Day 3 helpers: uploads + log -----------------
 
-# ---------- Day 3 helpers: uploads + log ----------
 
 def allowed_file(filename):
     """
@@ -141,21 +150,19 @@ def save_progress_log(entries):
 def save_progress_entry(region, soil, area_sqm, note, file_storage):
     """
     Save uploaded image + a log entry. Returns saved filename or None.
+    Uses secure_filename + save() as in the Flask upload pattern.
     """
     if not (file_storage and allowed_file(file_storage.filename)):
         return None
-
-    # Ensure upload folder exists
-    os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
     # Safe, timestamped filename
     timestamp = datetime.utcnow().strftime("%Y%m%d%H%M%S")
     original = secure_filename(file_storage.filename)
     filename = f"{timestamp}_{original}"
-    filepath = os.path.join(UPLOAD_FOLDER, filename)
+    filepath = os.path.join(app.config["UPLOAD_FOLDER"], filename)
 
     # Save file
-    file_storage.save(filepath)
+    file_storage.save(filepath)  # same pattern as recommended in Flask docs [web:0]
 
     # Append log entry
     entries = load_progress_log()
@@ -173,8 +180,8 @@ def save_progress_entry(region, soil, area_sqm, note, file_storage):
 
     return filename
 
+# ----------------- Routes -----------------
 
-# ---------- Routes ----------
 
 @app.route("/")
 def index():
@@ -257,6 +264,7 @@ def assess():
 def progress():
     """
     Upload a progress photo + note for a plot.
+    Day 3 feature: uses save_progress_entry to store file + log.
     """
     if request.method == "POST":
         # Hidden context fields
@@ -266,7 +274,6 @@ def progress():
         note = request.form.get("note", "").strip()
 
         file = request.files.get("photo")
-
         saved_filename = save_progress_entry(region, soil, area_sqm, note, file)
 
         # Simple success / error flag

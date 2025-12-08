@@ -1,49 +1,92 @@
 {% extends "base.html" %}
+
 {% block content %}
-  <section>
-    <h2>Track your forest</h2>
-    <p class="section-subtitle">
-      Upload a photo and add a short note to track how your Miyavkify forest grows.
-    </p>
+<section>
+  <h2>Track your forest</h2>
+  <p class="section-subtitle">
+    Keep a visual diary of your Miyavaki plot with photos and short notes.
+  </p>
 
-    {% if success is not none %}
-      {% if success %}
-        <p class="section-subtitle" style="color: #a5d6a7;">
-          Progress saved! 🎉
-        </p>
-      {% else %}
-        <p class="section-subtitle" style="color: #ff8a80;">
-          Upload failed. Please choose a JPG or PNG image and try again.
-        </p>
-      {% endif %}
+  {# Highlighted status message after submit #}
+  {% if success is not none %}
+    {% if success %}
+      <div
+        style="
+          margin: 8px 0 12px;
+          padding: 10px 14px;
+          border-radius: 14px;
+          background: rgba(56, 142, 60, 0.25);
+          border: 1px solid rgba(129, 199, 132, 0.9);
+          box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45);
+          font-size: 13px;
+          color: #e8f5e9;
+        "
+      >
+        <strong>Progress saved!</strong>
+        Your photo and note have been added to your forest log.
+      </div>
+    {% else %}
+      <div
+        style="
+          margin: 8px 0 12px;
+          padding: 10px 14px;
+          border-radius: 14px;
+          background: rgba(183, 28, 28, 0.25);
+          border: 1px solid rgba(255, 138, 128, 0.9);
+          box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45);
+          font-size: 13px;
+          color: #ffebee;
+        "
+      >
+        <strong>Upload failed.</strong>
+        Please choose a JPG or PNG image and try again.
+      </div>
     {% endif %}
+  {% endif %}
 
-    <!-- Upload form -->
-    <form method="post" enctype="multipart/form-data" class="form">
-      <!-- Keep plot context as hidden fields -->
+  <div class="form">
+    <form method="post" enctype="multipart/form-data">
+      {# Hidden context from results page #}
       <input type="hidden" name="region" value="{{ region }}">
       <input type="hidden" name="soil" value="{{ soil }}">
       <input type="hidden" name="area_sqm" value="{{ area_sqm }}">
 
       <div class="form-row">
         <label for="photo">Progress photo (JPG / PNG)</label>
-        <input type="file" id="photo" name="photo" accept=".jpg,.jpeg,.png" required>
+        <input
+          id="photo"
+          type="file"
+          name="photo"
+          accept=".jpg,.jpeg,.png"
+          required
+        >
+        <span class="field-hint">
+          Upload a clear photo of your plot so Miyavkify can log its growth.
+        </span>
       </div>
 
       <div class="form-row">
         <label for="note">Short note (optional)</label>
         <input
-          type="text"
           id="note"
+          type="text"
           name="note"
-          placeholder="e.g. Month 3: saplings now knee height"
+          placeholder="Example: Month 1 – saplings planted and mulched"
         >
+        <span class="field-hint">
+          Add a quick remark about what changed since the last photo.
+        </span>
       </div>
 
       <div class="form-actions">
-        <button type="submit" class="primary-btn">Save progress</button>
-        <a href="{{ url_for('assess') }}" class="secondary-btn">Back to assessment</a>
+        <button type="submit" class="primary-btn">
+          Save progress
+        </button>
+        <a href="{{ url_for('assess') }}" class="secondary-btn">
+          Back to assessment
+        </a>
       </div>
     </form>
-  </section>
+  </div>
+</section>
 {% endblock %}
