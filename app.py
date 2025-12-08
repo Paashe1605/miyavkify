@@ -196,6 +196,10 @@ def assess():
         wants_fruit = request.form.get("wants_fruit") == "on"
         area_sqm = request.form.get("area_sqm")
 
+        # NEW: check if an image was uploaded
+        image_file = request.files.get("plot_image")
+        has_image = bool(image_file and image_file.filename)
+
         # Miyawaki recommendations and impact
         rec = get_recommendations(region, soil, wants_fruit)
         tree_count = estimate_tree_count(area_sqm)
@@ -240,6 +244,7 @@ def assess():
             traditional_impact=traditional_impact,
             traditional_maturity_months=traditional_maturity_months,
             comparison=comparison,
+            has_image=has_image,  # NEW: pass flag to template
         )
 
     # For GET: show blank form
