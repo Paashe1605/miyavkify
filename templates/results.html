@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
   <section>
-    <h2>Your forest plan</h2>
+    <h2>Your forest plan <span class="chip chip--soft">Step 2 of 2</span></h2>
 
     <!-- Show basic context: region + soil -->
     <p class="section-subtitle">
@@ -11,7 +11,7 @@
     {% if recommendations.plants %}
       <!-- Two-column layout: tree list + impact metrics -->
       <div class="results-grid">
-        <!-- List of recommended species + image pill + infographics -->
+        <!-- List of recommended species + image pill + infographics + back button -->
         <div>
           <h3>Tree species to plant</h3>
 
@@ -55,11 +55,16 @@
               <span class="impact-value">{{ comparison.speed_ratio }}× faster</span>
             </div>
           </div>
+
+          <!-- Back button directly below bars -->
+          <div class="form-actions" style="margin-top: 10px;">
+            <a href="{{ url_for('assess') }}" class="secondary-btn">Back to assessment</a>
+          </div>
         </div>
 
         <!-- Calculated stats based on area and tree count -->
         <div class="metrics">
-          <h3>Quick stats</h3>
+          <h3>Quick stats <span class="chip chip--soft">Demo estimates</span></h3>
 
           <!-- Basic plot info -->
           <p>
@@ -71,7 +76,7 @@
           <div class="metrics-cards">
             <!-- Miyavaki card -->
             <div class="stats-card">
-              <h4>Miyavaki forest</h4>
+              <h4>MIYAVAKI FOREST</h4>
               <p>
                 Trees:
                 <strong>{{ tree_count }}</strong>
@@ -100,7 +105,7 @@
 
             <!-- Traditional card -->
             <div class="stats-card stats-card--alt">
-              <h4>Traditional plantation</h4>
+              <h4>TRADITIONAL PLANTATION</h4>
               <p>
                 Trees:
                 <strong>{{ traditional_tree_count }}</strong>
@@ -111,7 +116,7 @@
               </p>
               <p>
                 Total planting cost:
-                <strong>{{ traditional_impact.total_cost }}</strong>
+                <strong>₹{{ traditional_impact.total_cost }}</strong>
               </p>
               <p>
                 Becomes stable in about
@@ -147,10 +152,5 @@
         We don’t have data for this combination yet. Try a different region or soil type.
       </p>
     {% endif %}
-
-    <!-- Button to go back and change inputs -->
-    <div class="form-actions">
-      <a href="{{ url_for('assess') }}" class="secondary-btn">Back to assessment</a>
-    </div>
   </section>
 {% endblock %}
