@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section>
+  <h2>Forest gallery</h2>
+  <p class="section-subtitle">
+    See how your Miyavkify plots are growing over time.
+  </p>
+
+  {% if entries %}
+    <div class="gallery-grid">
+      {% for entry in entries %}
+        <article class="gallery-card">
+          <div class="gallery-image-wrapper">
+            <img
+              src="{{ url_for('static', filename='uploads/' ~ entry.filename) }}"
+              alt="Forest progress photo"
+            />
+          </div>
+
+          <div class="gallery-meta">
+            <p class="section-subtitle">
+              {{ entry.region }} • {{ entry.soil }} • {{ entry.area_sqm }} m²
+            </p>
+
+            {% if entry.note %}
+              <p class="gallery-note">
+                {{ entry.note }}
+              </p>
+            {% endif %}
+
+            <p class="gallery-date">
+              {{ entry.timestamp }}
+            </p>
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p class="section-subtitle">
+      No progress photos yet. After you upload your first one, it will appear here.
+    </p>
+  {% endif %}
+</section>
+{% endblock %}

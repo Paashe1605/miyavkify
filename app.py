@@ -179,6 +179,21 @@ def save_progress_entry(region, soil, area_sqm, note, file_storage):
     save_progress_log(entries)
 
     return filename
+def load_progress_entries():
+    """Read all saved progress entries from the JSON log."""
+    if not os.path.exists(LOG_PATH):
+        return []
+
+    try:
+        with open(LOG_PATH, "r", encoding="utf-8") as f:
+            entries = json.load(f)
+            # Ensure it's a list
+            if isinstance(entries, list):
+                return entries
+            return []
+    except (json.JSONDecodeError, FileNotFoundError):
+        return []
+
 
 # ----------------- Routes -----------------
 
@@ -294,6 +309,20 @@ def progress():
         area_sqm=area_sqm,
         success=None,
     )
+@app.route("/gallery")
+def gallery():
+    """Show all progress photos as a simple gallery."""
+    entries = load_progress_entries()
+
+    # Newest first by timestamp string; safe if timestamp is ISO-like
+    entries_sorted = sorted(
+        entries,
+        key=lambda e: e.get("timestamp", ""),
+        reverse=True,
+    )
+
+    return render_template("gallery.html", entries=entries_sorted)
+
 
 
 if __name__ == "__main__":
