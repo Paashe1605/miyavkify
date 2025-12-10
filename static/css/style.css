@@ -834,3 +834,22 @@ section h2 {
   color: #f7fff9;
   font-size: 0.8rem;
 }
+
+
+/* Force header auth buttons to be visible on light header */
+.app-user .header-logout-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #16492f;                 /* dark green pill */
+  color: #ffffff;
+  padding: 6px 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35);
+  text-decoration: none;
+}
+
+.app-user .header-logout-btn:hover {
+  background: #1d6140;
+}
