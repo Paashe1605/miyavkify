@@ -7,6 +7,14 @@
     See how your Miyavkify plots are growing over time.
   </p>
 
+  {% if badges %}
+    <div class="badge-strip">
+      {% for badge in badges %}
+        <span class="badge-pill">{{ badge }}</span>
+      {% endfor %}
+    </div>
+  {% endif %}
+
   {% if entries %}
     <div class="gallery-grid">
       {% for entry in entries %}
@@ -30,7 +38,7 @@
             {% endif %}
 
             <p class="gallery-date">
-              {{ entry.timestamp }}
+              {{ entry.created_at }}
             </p>
           </div>
         </article>

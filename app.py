@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, session, redirect, url_for
 import json
 import os
 from datetime import datetime
@@ -7,6 +7,9 @@ from werkzeug.utils import secure_filename
 # ----------------- App + paths -----------------
 
 app = Flask(__name__)
+
+# Secret key for session cookies (OK to hardcode for hackathon demo)
+app.secret_key = "miyavkify-demo-secret"
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -167,15 +170,17 @@ def save_progress_entry(region, soil, area_sqm, note, file_storage):
     # Append log entry
     entries = load_progress_log()
     entries.append(
-        {
-            "region": region,
-            "soil": soil,
-            "area_sqm": area_sqm,
-            "note": note,
-            "filename": filename,
-            "created_at": timestamp,
-        }
-    )
+    {
+        "region": region,
+        "soil": soil,
+        "area_sqm": area_sqm,
+        "note": note,
+        "filename": filename,
+        "created_at": timestamp,
+        "username": session.get("username"),
+    }
+)
+
     save_progress_log(entries)
 
     return filename
@@ -193,9 +198,55 @@ def load_progress_entries():
             return []
     except (json.JSONDecodeError, FileNotFoundError):
         return []
+def compute_badges_for_user(user_entries):
+    """
+    Return a small list of badge labels based on number of entries
+    for this user.
+    """
+    count = len(user_entries)
+    badges = []
+
+    if count >= 1:
+        badges.append("Forest starter")          # uploaded first photo
+    if count >= 3:
+        badges.append("Consistent carer")        # came back multiple times
+    if count >= 5:
+        badges.append("Storyteller")             # rich photo history
+
+    return badges
 
 
 # ----------------- Routes -----------------
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    """Very simple login: ask for a name and store it in session."""
+    if request.method == "POST":
+        username = (request.form.get("username") or "").strip()
+        if not username:
+            # Just re-render with a tiny message; no flash needed
+            return render_template("login.html", error="Please enter a name to continue.")
+        session["username"] = username
+        return redirect(url_for("index"))
+
+    # If already logged in, send to home
+    if "username" in session:
+        return redirect(url_for("index"))
+
+    return render_template("login.html")
+
+
+@app.route("/logout")
+def logout():
+    """Clear the session so user can switch identity."""
+    session.pop("username", None)
+    return redirect(url_for("login"))
+
+def require_login():
+    """Redirect to /login if no username set in session."""
+    if "username" not in session:
+        return redirect(url_for("login"))
+    return None
 
 
 @app.route("/")
@@ -208,6 +259,9 @@ def index():
 
 @app.route("/assess", methods=["GET", "POST"])
 def assess():
+    guard=require_login()
+    if guard:
+         return guard
     """
     Show form (GET) or results (POST).
     """
@@ -272,6 +326,9 @@ def assess():
 
 @app.route("/progress", methods=["GET", "POST"])
 def progress():
+    guard=require_login()
+    if guard:
+         return guard
     """
     Upload a progress photo + note for a plot.
     Day 3 feature: uses save_progress_entry to store file + log.
@@ -311,17 +368,34 @@ def progress():
     )
 @app.route("/gallery")
 def gallery():
-    """Show all progress photos as a simple gallery."""
-    entries = load_progress_entries()
+    guard = require_login()
+    if guard:
+        return guard
 
-    # Newest first by timestamp string; safe if timestamp is ISO-like
+    entries = load_progress_entries()
+    current_user = session.get("username")
+
+    # Filter entries for this user only
+    user_entries = [
+        e for e in entries
+        if e.get("username") == current_user
+    ]
+
+    # Newest first
     entries_sorted = sorted(
-        entries,
-        key=lambda e: e.get("timestamp", ""),
+        user_entries,
+        key=lambda e: e.get("created_at", ""),
         reverse=True,
     )
 
-    return render_template("gallery.html", entries=entries_sorted)
+    # Compute simple badges for this user
+    badges = compute_badges_for_user(user_entries)
+
+    return render_template(
+        "gallery.html",
+        entries=entries_sorted,
+        badges=badges,
+    )
 
 
 

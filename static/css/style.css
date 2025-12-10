@@ -105,6 +105,48 @@ body {
   background: rgba(76, 175, 80, 0.12);
 }
 
+/* User pill in header */
+.app-user {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.9rem;
+}
+
+.app-user-name {
+  color: #1b3b1b;          /* darker green text so it stands out on light bar */
+  font-weight: 600;
+}
+
+/* Login / Logout buttons in header – always visible and highlighted */
+.btn-login,
+.btn-logout {
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid #2e7d32;   /* green border */
+  font-size: 0.85rem;
+  text-decoration: none;
+  cursor: pointer;
+  background: #2e7d32;         /* solid green, always on */
+  color: #fdfdfd;              /* white text */
+}
+
+/* Keep both looking the same (you can tweak later if needed) */
+.btn-logout {
+  /* same base style as .btn-login */
+   background: #2e7d32;
+   color: #fdfdfd;
+}
+
+.btn-login {
+  /* same base style as .btn-logout */
+   background: #2e7d32;
+   color: #fdfdfd;
+}
+
+
+
+
 /* Main card */
 
 .app-main {
@@ -597,4 +639,20 @@ h3 {
   .metrics-cards {
     grid-template-columns: 1fr;
   }
+}
+/* Gallery badges (Day 6A) */
+.badge-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0.5rem 0 1rem;
+}
+
+.badge-pill {
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  background: rgba(144, 238, 144, 0.2);   /* soft light green chip */
+  border: 1px solid rgba(144, 238, 144, 0.6);
+  color: #f7fff9;
+  font-size: 0.8rem;
 }
