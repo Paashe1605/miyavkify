@@ -32,7 +32,7 @@
         <div class="app-user">
     {% if session.username %}
       <span class="app-user-name">Logged in as {{ session.username }}</span>
-      <a href="{{ url_for('logout') }}" class="secondary-btn">Logout</a>
+      <a href="{{ url_for('logout') }}" class="secondary-btn header-logout-btn">Logout</a>
     {% else %}
       <a href="{{ url_for('login') }}" class="secondary-btn">Login</a>
     {% endif %}

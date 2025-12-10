@@ -789,6 +789,20 @@ section h2 {
     width: 100%;
     justify-content: flex-start;
   }
+  /* Make Logout clearly visible on the light header */
+  .header-logout-btn {
+    background: #16492f;                 /* dark green pill on light header */
+    color: #ffffff;
+    padding: 6px 18px;
+    border-radius: 999px;
+    border: 1px solid rgba(0, 0, 0, 0.25);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35);
+  }
+
+  /* Slight visual change on hover */
+  .header-logout-btn:hover {
+    background: #1d6140;
+  }
 
   .card {
     padding: 16px;
