@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
   <section>
-    <h2>Your forest plan <span class="chip chip--soft">Step 2 of 2</span></h2>
+    <h2>Your forest plan 🌳✨ <span class="chip chip--soft">Step 2 of 2</span></h2>
 
     <!-- Show basic context: region + soil -->
     <p class="section-subtitle">
@@ -13,7 +13,7 @@
       <div class="results-grid">
         <!-- List of recommended species + image pill + infographics + back button -->
         <div>
-          <h3>Tree species to plant</h3>
+          <h3>Tree species to plant 🌱</h3>
 
           <!-- Image attached pill (shown only when image was uploaded) -->
           {% if has_image %}
@@ -34,37 +34,37 @@
           <!-- Simple infographic-style bars under the list -->
           <div class="impact-bars">
             <div class="impact-bar">
-              <span class="impact-label">Tree density advantage</span>
+              <span class="impact-label">Tree density advantage 🌳🌳</span>
               <div class="impact-track">
                 <div
                   class="impact-fill"
                   style="--fill-ratio: {{ comparison.trees_ratio / 3 }}">
                 </div>
               </div>
-              <span class="impact-value">{{ comparison.trees_ratio }}× more trees</span>
+              <span class="impact-value">{{ comparison.trees_ratio }}× more trees 🌲</span>
             </div>
 
             <div class="impact-bar">
-              <span class="impact-label">Time to stability</span>
+              <span class="impact-label">Time to stability ⏱️</span>
               <div class="impact-track">
                 <div
                   class="impact-fill impact-fill--fast"
                   style="--fill-ratio: {{ 1 / comparison.speed_ratio }}">
                 </div>
               </div>
-              <span class="impact-value">{{ comparison.speed_ratio }}× faster</span>
+              <span class="impact-value">{{ comparison.speed_ratio }}× faster ⚡</span>
             </div>
           </div>
 
           <!-- Back button directly below bars -->
           <div class="form-actions" style="margin-top: 10px;">
-            <a href="{{ url_for('assess') }}" class="secondary-btn">Back to assessment</a>
+            <a href="{{ url_for('assess') }}" class="secondary-btn">🔙 Back to assessment</a>
           </div>
         </div>
 
         <!-- Calculated stats based on area and tree count -->
         <div class="metrics">
-          <h3>Quick stats <span class="chip chip--soft">Demo estimates</span></h3>
+          <h3>Quick stats 📊 <span class="chip chip--soft">Demo estimates</span></h3>
 
           <!-- Basic plot info -->
           <p>
@@ -76,7 +76,7 @@
           <div class="metrics-cards">
             <!-- Miyavaki card -->
             <div class="stats-card">
-              <h4>MIYAVAKI FOREST</h4>
+              <h4>MIYAVAKI FOREST 🌿</h4>
               <p>
                 Trees:
                 <strong>{{ tree_count }}</strong>
@@ -105,7 +105,7 @@
 
             <!-- Traditional card -->
             <div class="stats-card stats-card--alt">
-              <h4>TRADITIONAL PLANTATION</h4>
+              <h4>TRADITIONAL PLANTATION 🌾</h4>
               <p>
                 Trees:
                 <strong>{{ traditional_tree_count }}</strong>
@@ -136,11 +136,11 @@
           <!-- Short comparison note -->
           <p class="note">
             Miyavaki-style planting gives about
-            <strong>{{ comparison.trees_ratio }}× more trees</strong>,
+            <strong>{{ comparison.trees_ratio }}× more trees 🌳</strong>,
             reaches stability about
-            <strong>{{ comparison.speed_ratio }}× faster</strong>,
+            <strong>{{ comparison.speed_ratio }}× faster ⚡</strong>,
             for roughly
-            <strong>{{ comparison.cost_ratio }}× the cost</strong>
+            <strong>{{ comparison.cost_ratio }}× the cost 💰</strong>
             on the same land (rough demo estimates).
           </p>
         </div>
@@ -148,44 +148,44 @@
 
       <!-- How to plant this forest: simple, guided steps -->
       <div class="card forest-steps-card">
-        <h3>How to plant this forest</h3>
+        <h3>How to plant this forest 🌱🌳</h3>
         <p class="section-subtitle">
           Use this as a simple checklist for your {{ area_sqm }} m² plot.
         </p>
 
         <ol class="steps-list">
           <li>
-            <strong>Prepare the soil:</strong>
+            <strong>Prepare the soil 🪵🧺:</strong>
             Clear weeds and debris, then loosen at least 30 cm of top soil.
             Mix in good compost or organic matter across the whole {{ area_sqm }} m² area so the soil stays moist and airy.
           </li>
 
           <li>
-            <strong>Plan dense spacing:</strong>
+            <strong>Plan dense spacing 📏:</strong>
             Aim for roughly 3–4 saplings per square meter so the canopy closes quickly.
             For your plot, plan to plant about <strong>{{ tree_count }}</strong> saplings, mixing different species together instead of in straight rows.
           </li>
 
           <li>
-            <strong>Mix species well:</strong>
+            <strong>Mix species well 🌈:</strong>
             Take the oxygen, fruit, and native species from your plan above and group them in small mixed clusters.
             Avoid planting the same species in long single-species lines; variety is the strength of a Miyawaki forest.
           </li>
 
           <li>
-            <strong>Plant correctly:</strong>
+            <strong>Plant correctly 🌿:</strong>
             Dig pits slightly wider than the sapling roots, add a bit of compost at the bottom, place the sapling straight,
             and press soil firmly so there are no big air gaps around the roots.
           </li>
 
           <li>
-            <strong>Mulch and protect:</strong>
+            <strong>Mulch and protect 🛡️:</strong>
             After planting, cover the surface with dry leaves, straw, or other organic mulch to keep moisture and suppress weeds.
             Add a simple fence or markers so people do not walk through the young forest by mistake.
           </li>
 
           <li>
-            <strong>Care for the first years:</strong>
+            <strong>Care for the first years 💧☀️:</strong>
             Water regularly (especially in the first hot season) and remove aggressive weeds near the saplings.
             With good care for roughly {{ recommendations.maturity_months or 24 }} months, the forest should become mostly self-sustaining.
           </li>
@@ -195,18 +195,18 @@
       <!-- Actions: back + add progress photo + gallery -->
       <div class="form-actions">
         <a href="{{ url_for('assess') }}" class="secondary-btn">
-          Back to assessment
+          🔙 Back to assessment
         </a>
 
         <a
           href="{{ url_for('progress', region=region, soil=soil, area_sqm=area_sqm) }}"
           class="primary-btn"
         >
-          Add progress photo
+          📸 Add progress photo
         </a>
 
         <a href="{{ url_for('gallery') }}" class="secondary-btn">
-          View gallery
+          🖼️ View gallery
         </a>
       </div>
 

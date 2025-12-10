@@ -2,31 +2,31 @@
 
 {% block content %}
 <section>
-  <h2>Welcome to Miyavkify</h2>
+  <h2>Welcome to Miyavkify 🌳✨</h2>
   <p class="section-subtitle">
-    Enter a name so we can keep your forest progress separate from others.
+    Enter a name so we can keep your forest progress separate from others 🌱.
   </p>
 
   <form method="post" class="form">
     {% if error %}
       <p class="section-subtitle" style="color: #c0392b;">
-        {{ error }}
+        {{ error }} ⚠️
       </p>
     {% endif %}
 
     <div class="form-row">
-      <label for="username">Your name or nickname</label>
+      <label for="username">Your name or nickname 🙋</label>
       <input
         type="text"
         id="username"
         name="username"
-        placeholder="e.g., Prachi, Paaras"
+        placeholder="e.g., Prachi, Paaras "
         required
       />
     </div>
 
     <div class="form-actions">
-      <button type="submit" class="primary-btn">Continue</button>
+      <button type="submit" class="primary-btn">Continue 👉</button>
     </div>
   </form>
 </section>

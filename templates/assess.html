@@ -1,25 +1,25 @@
 {% extends "base.html" %}
 {% block content %}
   <section>
-    <h2>Land assessment <span class="chip chip--soft">Step 1 of 2</span></h2>
+    <h2>Land assessment 🧭🌳 <span class="chip chip--soft">Step 1 of 2</span></h2>
 
     <!-- Small step indicator -->
     <p class="section-subtitle assess-steps">
-      <span class="step-dot step-dot--active"></span> Step 1 · Land details
+      <span class="step-dot step-dot--active"></span> Step 1 · Land details 🌱
       <span class="step-arrow">→</span>
-      <span class="step-dot"></span> Step 2 · Forest plan
+      <span class="step-dot"></span> Step 2 · Forest plan 🌳
     </p>
 
     <!-- Short explainer -->
     <p class="section-subtitle">
-      Tell us a bit about your land so we can suggest the right mix of trees.
+      Tell us a bit about your land so we can suggest the right mix of trees 🌿.
     </p>
 
     <!-- Main assessment form -->
     <form method="post" enctype="multipart/form-data" class="form assess-form">
       <!-- Region selection -->
       <div class="form-row">
-        <label for="region">Region / State</label>
+        <label for="region">Region / State 🌍</label>
         <small class="field-hint">Choose the state where your plot is located.</small>
         <select id="region" name="region" required>
           {% for r in regions %}
@@ -30,7 +30,7 @@
 
       <!-- Soil type selection -->
       <div class="form-row">
-        <label for="soil">Soil type</label>
+        <label for="soil">Soil type 🧱</label>
         <small class="field-hint">Pick the closest match; you can adjust later.</small>
         <select id="soil" name="soil" required>
           {% for s in soils %}
@@ -41,7 +41,7 @@
 
       <!-- Area input (used for tree count + impact) -->
       <div class="form-row">
-        <label for="area_sqm">Area of land (in square meters)</label>
+        <label for="area_sqm">Area of land (in square meters) 📏</label>
         <small class="field-hint">Approximate is okay; start with a rough number.</small>
         <input
           type="number"
@@ -58,14 +58,14 @@
       <div class="form-row checkbox-row">
         <label>
           <input type="checkbox" name="wants_fruit">
-          Include fruit-bearing trees
+          Include fruit-bearing trees 🍊
         </label>
         <small class="field-hint">We still prioritise native and high-oxygen species.</small>
       </div>
 
       <!-- Optional reference image -->
       <div class="form-row">
-        <label for="plot_image">Add a photo (optional)</label>
+        <label for="plot_image">Add a photo (optional) 📸</label>
         <small class="field-hint">Upload a photo of your plot so we can better understand the space.</small>
         <input
           type="file"
@@ -80,15 +80,15 @@
       <div id="image-upload-banner" class="image-upload-banner">
         <span class="image-pill-dot"></span>
         <span class="image-pill-text">
-          Image uploded successfully.
+          Image uploaded successfully ✅.
         </span>
       </div>
 
       <!-- Submit button + info strip -->
       <div class="form-actions assess-actions">
-        <button type="submit" class="primary-btn">Get recommendations</button>
+        <button type="submit" class="primary-btn">🌲 Get recommendations</button>
         <p class="form-note">
-          No personal data is collected here – only plot details to shape your forest plan.
+          No personal data is collected here – only plot details to shape your forest plan 🌏.
         </p>
       </div>
     </form>

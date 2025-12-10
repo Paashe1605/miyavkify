@@ -17,26 +17,26 @@
         <div class="brand">
           <div class="logo-circle">M</div>
           <div class="brand-text">
-            <h1>Miyavkify</h1>
-            <p>Plant. Grow. Breathe.</p>
+            <h1>Miyavkify 🌳</h1>
+            <p>Plant. Grow. Breathe. 🌿</p>
           </div>
         </div>
 
         <nav class="nav">
           <!-- Links to main pages -->
-          <a href="{{ url_for('index') }}" class="nav-link">Home</a>
-          <a href="{{ url_for('assess') }}" class="nav-link">Start Assessment</a>
-          <a href="{{ url_for('gallery') }}" class="nav-link">Gallery</a>
+          <a href="{{ url_for('index') }}" class="nav-link">Home 🏠</a>
+          <a href="{{ url_for('assess') }}" class="nav-link">Start Assessment 🌱</a>
+          <a href="{{ url_for('gallery') }}" class="nav-link">Gallery 🖼️</a>
         </nav>
         
         <div class="app-user">
-  {% if session.username %}
-    <span class="app-user-name">Logged in as {{ session.username }}</span>
-    <a href="{{ url_for('logout') }}" class="secondary-btn header-logout-btn">Logout</a>
-  {% else %}
-    <a href="{{ url_for('login') }}" class="secondary-btn header-logout-btn">Login</a>
-  {% endif %}
-</div>
+          {% if session.username %}
+            <span class="app-user-name">Logged in as {{ session.username }} 🌿</span>
+            <a href="{{ url_for('logout') }}" class="secondary-btn header-logout-btn">🚪 Logout</a>
+          {% else %}
+            <a href="{{ url_for('login') }}" class="secondary-btn header-logout-btn">🔐 Login</a>
+          {% endif %}
+        </div>
 
       </header>
 
@@ -49,7 +49,7 @@
 
       <!-- Small footer line -->
       <footer class="app-footer">
-        <small>Built for Autonomous Hacks 2026 • Greening one plot at a time</small>
+        <small>Built for Autonomous Hacks 2026 • Greening one plot at a time 🍃</small>
       </footer>
     </div>
   </body>
