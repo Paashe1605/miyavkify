@@ -4,29 +4,39 @@ import os
 from datetime import datetime
 from werkzeug.utils import secure_filename
 
+
 # ----------------- App + paths -----------------
 
+
 app = Flask(__name__)
+
 
 # Secret key for session cookies (OK to hardcode for hackathon demo)
 app.secret_key = "miyavkify-demo-secret"
 
+
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
 
 # Upload + log configuration
 UPLOAD_FOLDER = os.path.join(BASE_DIR, "static", "uploads")
 LOG_PATH = os.path.join(BASE_DIR, "data", "progress_log.json")
 ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg"}
 
+
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
+
 
 # Make sure upload folder exists
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
+
 # ----------------- Plant data -----------------
+
 
 with open(os.path.join(BASE_DIR, "plant_database.json"), "r", encoding="utf-8") as f:
     PLANT_DB = json.load(f)
+
 
 # ----------------- Recommendation + impact -----------------
 
@@ -119,6 +129,7 @@ def compute_impact(tree_count, cost_per_tree):
         "total_cost": total_cost,
     }
 
+
 # ----------------- Day 3 helpers: uploads + log -----------------
 
 
@@ -165,25 +176,27 @@ def save_progress_entry(region, soil, area_sqm, note, file_storage):
     filepath = os.path.join(app.config["UPLOAD_FOLDER"], filename)
 
     # Save file
-    file_storage.save(filepath)  # same pattern as recommended in Flask docs [web:0]
+    file_storage.save(filepath)
 
     # Append log entry
     entries = load_progress_log()
     entries.append(
-    {
-        "region": region,
-        "soil": soil,
-        "area_sqm": area_sqm,
-        "note": note,
-        "filename": filename,
-        "created_at": timestamp,
-        "username": session.get("username"),
-    }
-)
+        {
+            "region": region,
+            "soil": soil,
+            "area_sqm": area_sqm,
+            "note": note,
+            "filename": filename,
+            "created_at": timestamp,
+            "username": session.get("username"),
+        }
+    )
 
     save_progress_log(entries)
 
     return filename
+
+
 def load_progress_entries():
     """Read all saved progress entries from the JSON log."""
     if not os.path.exists(LOG_PATH):
@@ -198,6 +211,8 @@ def load_progress_entries():
             return []
     except (json.JSONDecodeError, FileNotFoundError):
         return []
+
+
 def compute_badges_for_user(user_entries):
     """
     Return a small list of badge labels based on number of entries
@@ -216,7 +231,64 @@ def compute_badges_for_user(user_entries):
     return badges
 
 
+# ----------------- DAY 7: AI coach helper -----------------
+# DAY 7 CHANGE START
+
+def get_ai_feedback(entry):
+    """
+    Very simple rule-based 'coach' that generates 1–3 tips
+    based on the note text and plot size.
+    """
+    tips = []
+
+    note = (entry.get("note") or "").lower()
+    area = entry.get("area_sqm")
+
+    # 1) Early stage hints based on wording
+    if any(kw in note for kw in ["day 1", "day one", "first day", "planted today", "sapling"]):
+        tips.append(
+            "Great start: keep the soil evenly moist for the first 2–3 weeks and avoid harsh afternoon sun for young saplings."
+        )
+    elif any(kw in note for kw in ["day 2", "day 3", "week 1", "week one"]):
+        tips.append(
+            "In the first week, check moisture daily and top up mulch wherever you see bare soil."
+        )
+
+    # 2) Growth-related keywords
+    if any(kw in note for kw in ["grew", "growth", "inch", "inches", "taller"]):
+        tips.append(
+            "Nice growth: water deeply rather than very frequently, and keep at least 30 cm of mixed native species around each sapling."
+        )
+
+    # 3) Stress / dryness markers
+    if any(kw in note for kw in ["dry", "heat", "hot", "sunburn", "wilt"]):
+        tips.append(
+            "If the plot feels dry or very hot, add extra mulch and water in early morning or late evening."
+        )
+
+    # 4) Larger plots need routine checks
+    try:
+        area_val = float(area)
+        if area_val >= 50:
+            tips.append(
+                "For a larger patch like this, do a quick monthly walk-through: fill gaps with new saplings to keep high density."
+            )
+    except (TypeError, ValueError):
+        pass
+
+    # 5) Fallback generic guidance
+    if not tips:
+        tips.append(
+            "Looks good: keep thick mulch, regular watering, and avoid removing leaf litter inside the forest zone."
+        )
+
+    return tips
+
+# DAY 7 CHANGE END
+
+
 # ----------------- Routes -----------------
+
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -242,6 +314,7 @@ def logout():
     session.pop("username", None)
     return redirect(url_for("login"))
 
+
 def require_login():
     """Redirect to /login if no username set in session."""
     if "username" not in session:
@@ -259,9 +332,9 @@ def index():
 
 @app.route("/assess", methods=["GET", "POST"])
 def assess():
-    guard=require_login()
+    guard = require_login()
     if guard:
-         return guard
+        return guard
     """
     Show form (GET) or results (POST).
     """
@@ -331,9 +404,9 @@ def assess():
 
 @app.route("/progress", methods=["GET", "POST"])
 def progress():
-    guard=require_login()
+    guard = require_login()
     if guard:
-         return guard
+        return guard
     """
     Upload a progress photo + note for a plot.
     Day 3 feature: uses save_progress_entry to store file + log.
@@ -371,6 +444,8 @@ def progress():
         area_sqm=area_sqm,
         success=None,
     )
+
+
 @app.route("/gallery")
 def gallery():
     guard = require_login()
@@ -392,6 +467,11 @@ def gallery():
         key=lambda e: e.get("created_at", ""),
         reverse=True,
     )
+
+    # DAY 7 CHANGE START: attach coach tips to each entry
+    for e in entries_sorted:
+        e["coach_tips"] = get_ai_feedback(e)
+    # DAY 7 CHANGE END
 
     # Compute simple badges for this user
     badges = compute_badges_for_user(user_entries)
@@ -416,7 +496,6 @@ def profile():
     user = current_user  # however you load the logged-in user
     badges = get_user_badges(user)
     return render_template("profile.html", user=user, badges=badges)
-
 
 
 

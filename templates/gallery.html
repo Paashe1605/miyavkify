@@ -26,7 +26,7 @@
             />
           </div>
 
-          <div class="gallery-meta">
+                    <div class="gallery-meta">
             <p class="section-subtitle">
               {{ entry.region }} • {{ entry.soil }} • {{ entry.area_sqm }} m²
             </p>
@@ -41,7 +41,21 @@
               {{ entry.created_at }}
             </p>
           </div>
+
+          {# ---------------- DAY 7: Miyavkify Coach (beta) ---------------- #}
+          {% if entry.coach_tips %}
+            <div class="coach-block">
+              <h3 class="coach-title">Miyavkify Coach (beta)</h3>
+              <ul class="coach-list">
+                {% for tip in entry.coach_tips %}
+                  <li>{{ tip }}</li>
+                {% endfor %}
+              </ul>
+            </div>
+          {% endif %}
+          {# ---------------- END DAY 7 ---------------- #}
         </article>
+
       {% endfor %}
     </div>
   {% else %}

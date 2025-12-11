@@ -1,5 +1,6 @@
 [
   {
+<<<<<<< HEAD
     "region": "Punjab",
     "soil": "sandy",
     "area_sqm": "44",
@@ -7,5 +8,23 @@
     "filename": "20251210145650_images.jpg",
     "created_at": "20251210145650",
     "username": "Prachi"
+=======
+    "region": "Uttar_Pradesh",
+    "soil": "loamy",
+    "area_sqm": "77",
+    "note": "sample day 1pic",
+    "filename": "20251211125550_testmiyavkiy.jpg",
+    "created_at": "20251211125550",
+    "username": "testuser1"
+  },
+  {
+    "region": "Andhra_Pradesh",
+    "soil": "clayey",
+    "area_sqm": "66",
+    "note": "sample day 2 pic it grew about 2 inches.",
+    "filename": "20251211125734_testmiyavkiy.jpg",
+    "created_at": "20251211125734",
+    "username": "testuser2"
+>>>>>>> aa82ffa36dc56ec9a88c18ae82bb2f4c41caf6c9
   }
 ]
