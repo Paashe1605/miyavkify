@@ -1,30 +1,26 @@
 [
   {
-<<<<<<< HEAD
-    "region": "Punjab",
+    "region": "Rajasthan",
     "soil": "sandy",
-    "area_sqm": "44",
-    "note": "month 2",
-    "filename": "20251210145650_images.jpg",
-    "created_at": "20251210145650",
-    "username": "Prachi"
-=======
-    "region": "Uttar_Pradesh",
-    "soil": "loamy",
-    "area_sqm": "77",
-    "note": "sample day 1pic",
-    "filename": "20251211125550_testmiyavkiy.jpg",
-    "created_at": "20251211125550",
-    "username": "testuser1"
+    "area_sqm": "444",
+    "note": "",
+    "filename": "20251211143644_images.jpg",
+    "created_at": "11 Dec 2025, 02:36 PM",
+    "username": "Prachi",
+    "coach_tips": [
+      "For a larger patch like this, do a quick monthly walk-through to fill gaps and keep high density."
+    ]
   },
   {
     "region": "Andhra_Pradesh",
     "soil": "clayey",
-    "area_sqm": "66",
-    "note": "sample day 2 pic it grew about 2 inches.",
-    "filename": "20251211125734_testmiyavkiy.jpg",
-    "created_at": "20251211125734",
-    "username": "testuser2"
->>>>>>> aa82ffa36dc56ec9a88c18ae82bb2f4c41caf6c9
+    "area_sqm": "452",
+    "note": "",
+    "filename": "20251211143945_images.jpg",
+    "created_at": "11 Dec 2025, 02:39 PM",
+    "username": "Prachi",
+    "coach_tips": [
+      "For a larger patch like this, do a quick monthly walk-through to fill gaps and keep high density."
+    ]
   }
 ]

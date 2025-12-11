@@ -2,9 +2,9 @@
 
 {% block content %}
 <section>
-  <h2>Forest gallery</h2>
+  <h2>Forest gallery 🌳</h2>
   <p class="section-subtitle">
-    See how your Miyavkify plots are growing over time.
+    See how your Miyavkify plots are growing over time 📸.
   </p>
 
   {% if badges %}
@@ -26,7 +26,7 @@
             />
           </div>
 
-                    <div class="gallery-meta">
+          <div class="gallery-meta">
             <p class="section-subtitle">
               {{ entry.region }} • {{ entry.soil }} • {{ entry.area_sqm }} m²
             </p>
@@ -45,7 +45,7 @@
           {# ---------------- DAY 7: Miyavkify Coach (beta) ---------------- #}
           {% if entry.coach_tips %}
             <div class="coach-block">
-              <h3 class="coach-title">Miyavkify Coach (beta)</h3>
+              <h3 class="coach-title">Miyavkify Coach (beta) 🌱</h3>
               <ul class="coach-list">
                 {% for tip in entry.coach_tips %}
                   <li>{{ tip }}</li>
@@ -60,7 +60,7 @@
     </div>
   {% else %}
     <p class="section-subtitle">
-      No progress photos yet. After you upload your first one, it will appear here.
+      No progress photos yet. After you upload your first one, it will appear here 🌿.
     </p>
   {% endif %}
 </section>
