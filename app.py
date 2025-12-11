@@ -401,6 +401,22 @@ def gallery():
         entries=entries_sorted,
         badges=badges,
     )
+def get_user_badges(user):
+    badges = []
+    if user.forest_count >= 1:
+        badges.append({"label": "First forest 🌱"})
+    if user.photo_count >= 1:
+        badges.append({"label": "Photo uploader 📸"})
+    if user.plan_days >= 3:
+        badges.append({"label": "Consistent planner 🔁"})
+    return badges
+
+@app.route("/profile")
+def profile():
+    user = current_user  # however you load the logged-in user
+    badges = get_user_badges(user)
+    return render_template("profile.html", user=user, badges=badges)
+
 
 
 
