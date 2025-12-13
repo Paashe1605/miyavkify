@@ -1,11 +1,25 @@
-# Created by venv; see https://docs.python.org/3/library/venv.html
-venv/
+# Python
 __pycache__/
-*.pyc
-instance/
-.env
-*.sqlite3
-*.db
-.DS_Store
-static/uploads/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+*.egg-info/
+dist/
+build/
 
+# Flask
+instance/
+.webassets-cache
+
+# Uploads (don't commit test images)
+static/uploads/*
+!static/uploads/.gitkeep
+
+# OS
+.DS_Store
+*.swp
+.env
